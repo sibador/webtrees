@@ -27,7 +27,7 @@ use Fisharebest\Webtrees\Individual;
 class CensusColumnBirthDayDotMonthYearTest extends \Fisharebest\Webtrees\TestCase
 {
     /**
-     * @covers \Fisharebest\Webtrees\Census\CensusColumnBirthDayDotMonthYearTest
+     * @covers \Fisharebest\Webtrees\Census\CensusColumnBirthDayDotMonthYear
      * @covers \Fisharebest\Webtrees\Census\AbstractCensusColumn
      *
      * @return void
@@ -38,7 +38,7 @@ class CensusColumnBirthDayDotMonthYearTest extends \Fisharebest\Webtrees\TestCas
         $cal_date->method('format')->willReturn('30. June 1832');
 
         $date = $this->createMock(Date::class);
-        $date->method('minimumJulianDay')->willReturn(2390364);
+        $date->method('minimumJulianDay')->willReturn(2390363);
         $date->method('maximumJulianDay')->willReturn(2390364);
         $date->method('minimumDate')->willReturn($cal_date);
 
@@ -50,6 +50,6 @@ class CensusColumnBirthDayDotMonthYearTest extends \Fisharebest\Webtrees\TestCas
 
         $column = new CensusColumnBirthDayDotMonthYear($census, '', '');
 
-        $this->assertSame('30. June 1832', $column->generate($individual, $individual));
+        $this->assertSame('', $column->generate($individual, $individual));
     }
 }

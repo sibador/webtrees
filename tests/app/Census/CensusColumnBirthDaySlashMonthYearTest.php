@@ -27,7 +27,7 @@ use Fisharebest\Webtrees\Individual;
 class CensusColumnBirthDaySlashMonthYearTest extends \Fisharebest\Webtrees\TestCase
 {
     /**
-     * @covers \Fisharebest\Webtrees\Census\CensusColumnBirthDaySlashMonthYearTest
+     * @covers \Fisharebest\Webtrees\Census\CensusColumnBirthDaySlashMonthYear
      * @covers \Fisharebest\Webtrees\Census\AbstractCensusColumn
      *
      * @return void
