@@ -13,8 +13,14 @@ namespace League\CommonMark;
 
 use League\CommonMark\Block\Parser\BlockParserInterface;
 use League\CommonMark\Block\Renderer\BlockRendererInterface;
+<<<<<<< HEAD
 use League\CommonMark\Inline\Parser\InlineParserInterface;
 use League\CommonMark\Inline\Processor\InlineProcessorInterface;
+=======
+use League\CommonMark\Delimiter\Processor\DelimiterProcessorCollection;
+use League\CommonMark\Event\AbstractEvent;
+use League\CommonMark\Inline\Parser\InlineParserInterface;
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 use League\CommonMark\Inline\Renderer\InlineRendererInterface;
 
 interface EnvironmentInterface
@@ -44,6 +50,7 @@ interface EnvironmentInterface
     public function getInlineParsersForCharacter(string $character): iterable;
 
     /**
+<<<<<<< HEAD
      * @return iterable<InlineProcessorInterface>
      */
     public function getInlineProcessors(): iterable;
@@ -52,6 +59,11 @@ interface EnvironmentInterface
      * @return iterable<DocumentProcessorInterface>
      */
     public function getDocumentProcessors(): iterable;
+=======
+     * @return DelimiterProcessorCollection
+     */
+    public function getDelimiterProcessors(): DelimiterProcessorCollection;
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 
     /**
      * @param string $blockClass
@@ -75,4 +87,16 @@ interface EnvironmentInterface
      * @return string
      */
     public function getInlineParserCharacterRegex(): string;
+<<<<<<< HEAD
+=======
+
+    /**
+     * Dispatches the given event to listeners
+     *
+     * @param AbstractEvent $event
+     *
+     * @return void
+     */
+    public function dispatch(AbstractEvent $event): void;
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 }

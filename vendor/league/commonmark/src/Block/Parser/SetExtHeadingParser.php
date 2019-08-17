@@ -18,10 +18,17 @@ use League\CommonMark\Block\Element\Heading;
 use League\CommonMark\Block\Element\Paragraph;
 use League\CommonMark\ContextInterface;
 use League\CommonMark\Cursor;
+<<<<<<< HEAD
 use League\CommonMark\ReferenceParser;
 use League\CommonMark\Util\RegexHelper;
 
 class SetExtHeadingParser implements BlockParserInterface
+=======
+use League\CommonMark\Reference\ReferenceParser;
+use League\CommonMark\Util\RegexHelper;
+
+final class SetExtHeadingParser implements BlockParserInterface
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 {
     /**
      * @param ContextInterface $context
@@ -47,7 +54,11 @@ class SetExtHeadingParser implements BlockParserInterface
         $level = $match[0][0] === '=' ? 1 : 2;
         $strings = $context->getContainer()->getStrings();
 
+<<<<<<< HEAD
         $strings = $this->resolveReferenceLinkDefinitions($strings, $cursor->getEncoding(), $context->getReferenceParser());
+=======
+        $strings = $this->resolveReferenceLinkDefinitions($strings, $context->getReferenceParser());
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
         if (empty($strings)) {
             return false;
         }
@@ -63,15 +74,25 @@ class SetExtHeadingParser implements BlockParserInterface
      * @see https://github.com/commonmark/commonmark.js/commit/993bbe335931af847460effa99b2411eb643577d
      *
      * @param string[]        $strings
+<<<<<<< HEAD
      * @param string          $encoding
+=======
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
      * @param ReferenceParser $referenceParser
      *
      * @return string[]
      */
+<<<<<<< HEAD
     private function resolveReferenceLinkDefinitions(array $strings, string $encoding, ReferenceParser $referenceParser): array
     {
         foreach ($strings as &$string) {
             $cursor = new Cursor($string, $encoding);
+=======
+    private function resolveReferenceLinkDefinitions(array $strings, ReferenceParser $referenceParser): array
+    {
+        foreach ($strings as &$string) {
+            $cursor = new Cursor($string);
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
             while ($cursor->getCharacter() === '[' && $referenceParser->parse($cursor)) {
                 $string = $cursor->getRemainder();
             }

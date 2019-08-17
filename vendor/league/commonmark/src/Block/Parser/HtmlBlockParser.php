@@ -20,7 +20,11 @@ use League\CommonMark\ContextInterface;
 use League\CommonMark\Cursor;
 use League\CommonMark\Util\RegexHelper;
 
+<<<<<<< HEAD
 class HtmlBlockParser implements BlockParserInterface
+=======
+final class HtmlBlockParser implements BlockParserInterface
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 {
     /**
      * @param ContextInterface $context

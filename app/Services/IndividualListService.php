@@ -223,10 +223,14 @@ class IndividualListService
                 new Expression('UPPER(n_surn /*! COLLATE ' . I18N::collation() . ' */) AS n_surn'),
                 new Expression('n_surname /*! COLLATE utf8_bin */ AS n_surname'),
                 new Expression('COUNT(*) AS total'),
+<<<<<<< HEAD
             ])
             ->groupBy(['n_surn'])
             ->groupBy(['n_surname'])
             ->orderBy('n_surname');
+=======
+            ]);
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 
         $this->whereFamily($fams, $query);
         $this->whereMarriedName($marnm, $query);
@@ -243,7 +247,10 @@ class IndividualListService
             // All surnames
             $query->whereNotIn('n_surn', ['', '@N.N.']);
         }
-        $query->groupBy(['n_surn'])->groupBy(['n_surname']);
+        $query
+            ->groupBy(['n_surn'])
+            ->groupBy(['n_surname'])
+            ->orderBy('n_surname');
 
         $list = [];
 

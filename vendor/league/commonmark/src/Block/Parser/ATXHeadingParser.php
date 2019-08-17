@@ -19,7 +19,11 @@ use League\CommonMark\ContextInterface;
 use League\CommonMark\Cursor;
 use League\CommonMark\Util\RegexHelper;
 
+<<<<<<< HEAD
 class ATXHeadingParser implements BlockParserInterface
+=======
+final class ATXHeadingParser implements BlockParserInterface
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 {
     /**
      * @param ContextInterface $context

@@ -11,8 +11,13 @@
 
 namespace PHPSTORM_META
 {
+<<<<<<< HEAD
     expectedArguments(\League\CommonMark\Context::setEncoding(), 0, 'UTF-8', 'ASCII', 'ISO-8859-1');
     expectedArguments(\League\CommonMark\Cursor::__construct(), 1, 'UTF-8', 'ASCII', 'ISO-8859-1');
+=======
+    expectedArguments(\League\CommonMark\Context::setEncoding(), 0, 'UTF-8', 'ASCII');
+    expectedArguments(\League\CommonMark\Cursor::__construct(), 1, 'UTF-8', 'ASCII');
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     expectedArguments(\League\CommonMark\HtmlElement::__construct(), 0, 'a', 'abbr', 'address', 'area', 'article', 'aside', 'audio', 'b', 'base', 'bdi', 'bdo', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'cite', 'code', 'col', 'colgroup', 'data', 'datalist', 'dd', 'del', 'details', 'dfn', 'dialog', 'div', 'dl', 'dt', 'em', 'embed', 'fieldset', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hgroup', 'hr', 'html', 'i', 'iframe', 'img', 'input', 'ins', 'kdb', 'keygen', 'label', 'legend', 'li', 'link', 'main', 'map', 'mark', 'menu', 'menuitem', 'meta', 'meter', 'nav', 'noscript', 'object', 'ol', 'optgroup', 'option', 'output', 'p', 'param', 'pre', 'progress', 'q', 's', 'samp', 'script', 'section', 'select', 'small', 'source', 'span', 'strong', 'style', 'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'template', 'textarea', 'tfoot', 'th', 'thead', 'time', 'tr', 'track', 'u', 'ul', 'var', 'video', 'wbr');
     expectedArguments(\League\CommonMark\Block\Element\Heading::__construct(), 0, 1, 2, 3, 4, 5, 6);
     expectedReturnValues(\League\CommonMark\Block\Element\Heading::getLevel(), 1, 2, 3, 4, 5, 6);
@@ -27,4 +32,12 @@ namespace PHPSTORM_META
     registerArgumentsSet('league_commonmark_newline_types', \League\CommonMark\Inline\Element\Newline::HARDBREAK, \League\CommonMark\Inline\Element\Newline::SOFTBREAK);
     expectedArguments(\League\CommonMark\Inline\Element\Newline::__construct(), 0, argumentsSet('league_commonmark_newline_types'));
     expectedReturnValues(\League\CommonMark\Inline\Element\Newline::getType(), argumentsSet('league_commonmark_newline_types'));
+<<<<<<< HEAD
+=======
+
+    registerArgumentsSet('league_commonmark_options', 'renderer', 'enable_em', 'enable_strong', 'use_asterisk', 'use_underscore', 'html_input', 'allow_unsafe_links', 'max_nesting_level');
+    expectedArguments(\League\CommonMark\EnvironmentInterface::getConfig(), 0, argumentsSet('league_commonmark_options'));
+    expectedArguments(\League\CommonMark\Util\ConfigurationInterface::get(), 0, argumentsSet('league_commonmark_options'));
+    expectedArguments(\League\CommonMark\Util\ConfigurationInterface::set(), 0, argumentsSet('league_commonmark_options'));
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 }

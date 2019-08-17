@@ -17,12 +17,11 @@ declare(strict_types=1);
 
 namespace Fisharebest\Webtrees\Functions;
 
-use Exception;
 use Fisharebest\Webtrees\Date;
+use Fisharebest\Webtrees\Exceptions\GedcomErrorException;
 use Fisharebest\Webtrees\Gedcom;
 use Fisharebest\Webtrees\GedcomRecord;
 use Fisharebest\Webtrees\GedcomTag;
-use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Log;
 use Fisharebest\Webtrees\Media;
@@ -414,7 +413,7 @@ class FunctionsImport
                 case 'PLAC':
                     $tag = 'PLAC';
                     // Consistent commas
-                    $data = preg_replace('/ *(،|,) */', ', ', $data);
+                    $data = preg_replace('/ *, */', ', ', $data);
                     // The Master Genealogist stores LAT/LONG data in the PLAC field, e.g. Pennsylvania, USA, 395945N0751013W
                     if (preg_match('/(.*), (\d\d)(\d\d)(\d\d)([NS])(\d\d\d)(\d\d)(\d\d)([EW])$/', $data, $match)) {
                         $data =
@@ -578,7 +577,7 @@ class FunctionsImport
                         $data = substr($data, strlen($GEDCOM_MEDIA_PATH));
                     }
                     // convert backslashes in filenames to forward slashes
-                    $data = preg_replace("/\\\/", '/', $data);
+                    $data = preg_replace("/\\\\/", '/', $data);
 
                     $newrec .= ($newrec ? "\n" : '') . $level . ' ' . ($level === '0' && $xref ? $xref . ' ' : '') . $tag . ($data === '' && $tag !== 'NOTE' ? '' : ' ' . $data);
                     break;
@@ -601,7 +600,7 @@ class FunctionsImport
      * @param bool   $update whether or not this is an updated record that has been accepted
      *
      * @return void
-     * @throws Exception
+     * @throws GedcomErrorException
      */
     public static function importRecord($gedrec, Tree $tree, $update): void
     {
@@ -626,7 +625,7 @@ class FunctionsImport
             $type = $match[1];
             $xref = $type; // For HEAD/TRLR, use type as pseudo XREF.
         } else {
-            throw new Exception(I18N::translate('Invalid GEDCOM record') . '<br><pre>' . e($gedrec) . '</pre>');
+            throw new GedcomErrorException($gedrec);
         }
 
         // If the user has downloaded their GEDCOM data (containing media objects) and edited it
@@ -1104,6 +1103,7 @@ class FunctionsImport
             Log::addEditLog("Accepted change {$change->change_id} for {$xref} / {$change->gedcom_name} into database", $tree);
         }
     }
+
     /**
      * update a record in the database
      *
@@ -1112,6 +1112,7 @@ class FunctionsImport
      * @param bool   $delete
      *
      * @return void
+     * @throws GedcomErrorException
      */
     public static function updateRecord($gedrec, Tree $tree, bool $delete): void
     {
@@ -1122,9 +1123,7 @@ class FunctionsImport
             $gid  = $match[1];
             $type = $match[1];
         } else {
-            echo 'ERROR: Invalid gedcom record.';
-
-            return;
+            throw new GedcomErrorException($gedrec);
         }
 
         // Place links

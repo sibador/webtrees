@@ -15,17 +15,21 @@
 namespace League\CommonMark;
 
 use League\CommonMark\Block\Element\AbstractBlock;
+use League\CommonMark\Block\Element\AbstractStringContainerBlock;
 use League\CommonMark\Block\Element\Document;
-use League\CommonMark\Block\Element\InlineContainerInterface;
 use League\CommonMark\Block\Element\Paragraph;
 use League\CommonMark\Block\Element\StringContainerInterface;
+<<<<<<< HEAD
+=======
+use League\CommonMark\Event\DocumentParsedEvent;
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 
-class DocParser
+final class DocParser implements DocParserInterface
 {
     /**
      * @var EnvironmentInterface
      */
-    protected $environment;
+    private $environment;
 
     /**
      * @var InlineParserEngine
@@ -48,6 +52,7 @@ class DocParser
     }
 
     /**
+<<<<<<< HEAD
      * @return EnvironmentInterface
      */
     public function getEnvironment(): EnvironmentInterface
@@ -56,6 +61,8 @@ class DocParser
     }
 
     /**
+=======
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
      * @param string $input
      *
      * @return string[]
@@ -81,8 +88,13 @@ class DocParser
      */
     public function parse(string $input): Document
     {
+<<<<<<< HEAD
         $context = new Context(new Document(), $this->getEnvironment());
         $context->setEncoding(\mb_detect_encoding($input, 'ASCII,UTF-8', true) ?: 'ISO-8859-1');
+=======
+        $document = new Document();
+        $context = new Context($document, $this->environment);
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 
         $lines = $this->preProcessInput($input);
         foreach ($lines as $line) {
@@ -97,9 +109,9 @@ class DocParser
 
         $this->processInlines($context);
 
-        $this->processDocument($context);
+        $this->environment->dispatch(new DocumentParsedEvent($document));
 
-        return $context->getDocument();
+        return $document;
     }
 
     private function incorporateLine(ContextInterface $context)
@@ -107,7 +119,7 @@ class DocParser
         $context->getBlockCloser()->resetTip();
         $context->setBlocksParsed(false);
 
-        $cursor = new Cursor($context->getLine(), $context->getEncoding());
+        $cursor = new Cursor($context->getLine());
 
         $this->resetContainer($context, $cursor);
         $context->getBlockCloser()->setLastMatchedContainer($context->getContainer());
@@ -136,6 +148,7 @@ class DocParser
             $context->addBlock($p);
             $cursor->advanceToNextNonSpaceOrTab();
             $p->addLine($cursor->getRemainder());
+<<<<<<< HEAD
         }
     }
 
@@ -143,6 +156,8 @@ class DocParser
     {
         foreach ($this->getEnvironment()->getDocumentProcessors() as $documentProcessor) {
             $documentProcessor->processDocument($context->getDocument());
+=======
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
         }
     }
 
@@ -156,7 +171,7 @@ class DocParser
             }
 
             $node = $event->getNode();
-            if ($node instanceof InlineContainerInterface) {
+            if ($node instanceof AbstractStringContainerBlock) {
                 $this->inlineParserEngine->parse($node, $context->getDocument()->getReferenceMap());
             }
         }
@@ -208,7 +223,11 @@ class DocParser
                 }
             }
 
+<<<<<<< HEAD
             if (!$parsed || $context->getContainer() instanceof StringContainerInterface || $context->getTip()->getDepth() >= $this->maxNestingLevel) {
+=======
+            if (!$parsed || $context->getContainer() instanceof StringContainerInterface || (($tip = $context->getTip()) && $tip->getDepth() >= $this->maxNestingLevel)) {
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
                 $context->setBlocksParsed(true);
                 break;
             }

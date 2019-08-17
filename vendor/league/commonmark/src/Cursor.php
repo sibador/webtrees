@@ -79,6 +79,7 @@ class Cursor
     private $charCache = [];
 
     /**
+<<<<<<< HEAD
      * @param string $line     The line being parsed
      * @param string $encoding The encoding of that line
      */
@@ -94,6 +95,17 @@ class Cursor
     public function getEncoding(): string
     {
         return $this->encoding;
+=======
+     * @param string $line The line being parsed (ASCII or UTF-8)
+     */
+    public function __construct(string $line)
+    {
+        $this->line = $line;
+        $this->length = \mb_strlen($line, 'UTF-8') ?: 0;
+        $this->isMultibyte = $this->length !== \strlen($line);
+        $this->encoding = $this->isMultibyte ? 'UTF-8' : 'ASCII';
+        $this->lineContainsTabs = \preg_match('/\t/', $line) > 0;
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     }
 
     /**
