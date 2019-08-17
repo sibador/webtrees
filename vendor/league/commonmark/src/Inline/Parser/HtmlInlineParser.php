@@ -18,7 +18,11 @@ use League\CommonMark\Inline\Element\HtmlInline;
 use League\CommonMark\InlineParserContext;
 use League\CommonMark\Util\RegexHelper;
 
+<<<<<<< HEAD
 class HtmlInlineParser implements InlineParserInterface
+=======
+final class HtmlInlineParser implements InlineParserInterface
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 {
     /**
      * @return string[]

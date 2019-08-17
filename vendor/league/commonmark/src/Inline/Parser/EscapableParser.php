@@ -19,7 +19,11 @@ use League\CommonMark\Inline\Element\Text;
 use League\CommonMark\InlineParserContext;
 use League\CommonMark\Util\RegexHelper;
 
+<<<<<<< HEAD
 class EscapableParser implements InlineParserInterface
+=======
+final class EscapableParser implements InlineParserInterface
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 {
     /**
      * @return string[]

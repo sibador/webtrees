@@ -66,7 +66,11 @@
     },
     "bin": ["bin/commonmark"],
     "scripts": {
+<<<<<<< HEAD
         "phpstan": "phpstan analyse -l 4 src",
+=======
+        "phpstan": "phpstan analyse",
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
         "phpunit": "phpunit --no-coverage",
         "test": [
             "@phpstan",
@@ -75,7 +79,11 @@
     },
     "extra": {
         "branch-alias": {
+<<<<<<< HEAD
             "dev-master": "0.20-dev"
+=======
+            "dev-master": "1.1-dev"
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
         }
     },
     "config": {

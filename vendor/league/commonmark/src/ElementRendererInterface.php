@@ -29,6 +29,16 @@ interface ElementRendererInterface
      * @return mixed|null
      */
     public function getOption(string $option, $default = null);
+<<<<<<< HEAD
+=======
+
+    /**
+     * @param AbstractInline $inline
+     *
+     * @return string
+     */
+    public function renderInline(AbstractInline $inline): string;
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 
     /**
      * @param AbstractInline[] $inlines

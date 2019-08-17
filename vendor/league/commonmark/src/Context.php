@@ -16,6 +16,7 @@ namespace League\CommonMark;
 
 use League\CommonMark\Block\Element\AbstractBlock;
 use League\CommonMark\Block\Element\Document;
+use League\CommonMark\Reference\ReferenceParser;
 
 /**
  * Maintains the current state of the Markdown parser engine
@@ -63,11 +64,14 @@ class Context implements ContextInterface
     protected $blocksParsed = false;
 
     /**
+<<<<<<< HEAD
      * @var string
      */
     protected $encoding = 'UTF-8';
 
     /**
+=======
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
      * @var ReferenceParser
      */
     protected $referenceParser;
@@ -175,11 +179,16 @@ class Context implements ContextInterface
     {
         $this->getBlockCloser()->closeUnmatchedBlocks();
         $block->setStartLine($this->lineNumber);
-        while (!$this->tip->canContain($block)) {
+
+        while ($this->tip !== null && !$this->tip->canContain($block)) {
             $this->tip->finalize($this, $this->lineNumber);
         }
 
-        $this->tip->appendChild($block);
+        // This should always be true
+        if ($this->tip !== null) {
+            $this->tip->appendChild($block);
+        }
+
         $this->tip = $block;
         $this->container = $block;
     }
@@ -226,6 +235,7 @@ class Context implements ContextInterface
     {
         return $this->referenceParser;
     }
+<<<<<<< HEAD
 
     /**
      * @return string
@@ -246,4 +256,6 @@ class Context implements ContextInterface
 
         return $this;
     }
+=======
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 }

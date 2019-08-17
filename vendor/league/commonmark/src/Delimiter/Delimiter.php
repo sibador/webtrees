@@ -14,53 +14,57 @@
 
 namespace League\CommonMark\Delimiter;
 
-use League\CommonMark\Node\Node;
+use League\CommonMark\Inline\Element\AbstractStringContainer;
 
-class Delimiter
+final class Delimiter implements DelimiterInterface
 {
     /** @var string */
-    protected $char;
+    private $char;
 
     /** @var int */
-    protected $numDelims;
+    private $length;
 
     /** @var int */
-    protected $origDelims;
+    private $originalLength;
 
-    /** @var Node */
-    protected $inlineNode;
+    /** @var AbstractStringContainer */
+    private $inlineNode;
 
-    /** @var Delimiter|null */
-    protected $previous;
+    /** @var DelimiterInterface|null */
+    private $previous;
 
-    /** @var Delimiter|null */
-    protected $next;
-
-    /** @var bool */
-    protected $canOpen;
+    /** @var DelimiterInterface|null */
+    private $next;
 
     /** @var bool */
-    protected $canClose;
+    private $canOpen;
 
     /** @var bool */
-    protected $active;
+    private $canClose;
+
+    /** @var bool */
+    private $active;
 
     /** @var int|null */
-    protected $index;
+    private $index;
 
     /**
-     * @param string   $char
-     * @param int      $numDelims
-     * @param Node     $node
-     * @param bool     $canOpen
-     * @param bool     $canClose
-     * @param int|null $index
+     * @param string                  $char
+     * @param int                     $numDelims
+     * @param AbstractStringContainer $node
+     * @param bool                    $canOpen
+     * @param bool                    $canClose
+     * @param int|null                $index
      */
+<<<<<<< HEAD
     public function __construct(string $char, int $numDelims, Node $node, bool $canOpen, bool $canClose, ?int $index = null)
+=======
+    public function __construct(string $char, int $numDelims, AbstractStringContainer $node, bool $canOpen, bool $canClose, ?int $index = null)
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     {
         $this->char = $char;
-        $this->numDelims = $numDelims;
-        $this->origDelims = $numDelims;
+        $this->length = $numDelims;
+        $this->originalLength = $numDelims;
         $this->inlineNode = $node;
         $this->canOpen = $canOpen;
         $this->canClose = $canClose;
@@ -69,7 +73,7 @@ class Delimiter
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
     public function canClose(): bool
     {
@@ -77,19 +81,15 @@ class Delimiter
     }
 
     /**
-     * @param bool $canClose
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function setCanClose(bool $canClose)
     {
         $this->canClose = $canClose;
-
-        return $this;
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
     public function canOpen(): bool
     {
@@ -97,6 +97,7 @@ class Delimiter
     }
 
     /**
+<<<<<<< HEAD
      * @param bool $canOpen
      *
      * @return $this
@@ -110,6 +111,9 @@ class Delimiter
 
     /**
      * @return bool
+=======
+     * {@inheritdoc}
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
      */
     public function isActive(): bool
     {
@@ -117,19 +121,15 @@ class Delimiter
     }
 
     /**
-     * @param bool $active
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function setActive(bool $active)
     {
         $this->active = $active;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getChar(): string
     {
@@ -137,6 +137,7 @@ class Delimiter
     }
 
     /**
+<<<<<<< HEAD
      * @param string $char
      *
      * @return $this
@@ -150,6 +151,9 @@ class Delimiter
 
     /**
      * @return int|null
+=======
+     * {@inheritdoc}
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
      */
     public function getIndex(): ?int
     {
@@ -157,10 +161,9 @@ class Delimiter
     }
 
     /**
-     * @param int|null $index
-     *
-     * @return $this
+     * {@inheritdoc}
      */
+<<<<<<< HEAD
     public function setIndex(?int $index)
     {
         $this->index = $index;
@@ -172,84 +175,93 @@ class Delimiter
      * @return Delimiter|null
      */
     public function getNext(): ?self
+=======
+    public function getNext(): ?DelimiterInterface
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     {
         return $this->next;
     }
 
     /**
-     * @param Delimiter|null $next
-     *
-     * @return $this
+     * {@inheritdoc}
      */
+<<<<<<< HEAD
     public function setNext(?self $next)
+=======
+    public function setNext(?DelimiterInterface $next)
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     {
         $this->next = $next;
-
-        return $this;
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
+<<<<<<< HEAD
     public function getNumDelims(): int
+=======
+    public function getLength(): int
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     {
-        return $this->numDelims;
+        return $this->length;
     }
 
     /**
-     * @param int $numDelims
-     *
-     * @return $this
+     * {@inheritdoc}
      */
+<<<<<<< HEAD
     public function setNumDelims(int $numDelims)
+=======
+    public function setLength(int $length)
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     {
-        $this->numDelims = $numDelims;
-
-        return $this;
+        $this->length = $length;
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
+<<<<<<< HEAD
     public function getOrigDelims(): int
+=======
+    public function getOriginalLength(): int
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     {
-        return $this->origDelims;
+        return $this->originalLength;
     }
 
     /**
-     * @return Node
+     * {@inheritdoc}
      */
+<<<<<<< HEAD
     public function getInlineNode(): Node
+=======
+    public function getInlineNode(): AbstractStringContainer
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     {
         return $this->inlineNode;
     }
 
     /**
-     * @param Node $node
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setInlineNode(Node $node)
-    {
-        $this->inlineNode = $node;
-
-        return $this;
-    }
-
-    /**
-     * @return Delimiter|null
-     */
+<<<<<<< HEAD
     public function getPrevious(): ?self
+=======
+    public function getPrevious(): ?DelimiterInterface
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     {
         return $this->previous;
     }
 
     /**
-     * @param Delimiter|null $previous
-     *
-     * @return $this
+     * {@inheritdoc}
      */
+<<<<<<< HEAD
     public function setPrevious(?self $previous)
+=======
+    public function setPrevious(?DelimiterInterface $previous): DelimiterInterface
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     {
         $this->previous = $previous;
 

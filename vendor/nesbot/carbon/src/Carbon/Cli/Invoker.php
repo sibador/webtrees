@@ -19,7 +19,12 @@ class Invoker
             return $this->runWithCli(self::CLI_CLASS_NAME, $parameters);
         }
 
+<<<<<<< HEAD
         shell_exec('composer require carbon-cli/carbon-cli --no-interaction');
+=======
+        $function = (($parameters[1] ?? '') === 'install' ? ($parameters[2] ?? null) : null) ?: 'shell_exec';
+        $function('composer require carbon-cli/carbon-cli --no-interaction');
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 
         echo 'Installation succeeded.';
 

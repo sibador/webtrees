@@ -15,25 +15,36 @@
 namespace League\CommonMark\Inline\Parser;
 
 use League\CommonMark\Cursor;
+<<<<<<< HEAD
 use League\CommonMark\Delimiter\Delimiter;
 use League\CommonMark\Delimiter\DelimiterStack;
 use League\CommonMark\EnvironmentAwareInterface;
 use League\CommonMark\EnvironmentInterface;
+=======
+use League\CommonMark\Delimiter\DelimiterInterface;
+use League\CommonMark\EnvironmentAwareInterface;
+use League\CommonMark\EnvironmentInterface;
+use League\CommonMark\Inline\AdjacentTextMerger;
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 use League\CommonMark\Inline\Element\AbstractWebResource;
 use League\CommonMark\Inline\Element\Image;
 use League\CommonMark\Inline\Element\Link;
 use League\CommonMark\InlineParserContext;
-use League\CommonMark\Reference\Reference;
-use League\CommonMark\Reference\ReferenceMap;
+use League\CommonMark\Reference\ReferenceInterface;
+use League\CommonMark\Reference\ReferenceMapInterface;
 use League\CommonMark\Util\LinkParserHelper;
 use League\CommonMark\Util\RegexHelper;
 
+<<<<<<< HEAD
 class CloseBracketParser implements InlineParserInterface, EnvironmentAwareInterface
+=======
+final class CloseBracketParser implements InlineParserInterface, EnvironmentAwareInterface
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
 {
     /**
      * @var EnvironmentInterface
      */
-    protected $environment;
+    private $environment;
 
     /**
      * @return string[]
@@ -87,14 +98,14 @@ class CloseBracketParser implements InlineParserInterface, EnvironmentAwareInter
             $inline->appendChild($label);
         }
 
+        // Process delimiters such as emphasis inside link/image
         $delimiterStack = $inlineContext->getDelimiterStack();
         $stackBottom = $opener->getPrevious();
-        foreach ($this->environment->getInlineProcessors() as $inlineProcessor) {
-            $inlineProcessor->processInlines($delimiterStack, $stackBottom);
-        }
-        if ($delimiterStack instanceof DelimiterStack) {
-            $delimiterStack->removeAll($stackBottom);
-        }
+        $delimiterStack->processDelimiters($stackBottom, $this->environment->getDelimiterProcessors());
+        $delimiterStack->removeAll($stackBottom);
+
+        // Merge any adjacent Text nodes together
+        AdjacentTextMerger::mergeChildNodes($inline);
 
         // processEmphasis will remove this and later delimiters.
         // Now, for a link, we also remove earlier link openers (no links in links)
@@ -114,14 +125,18 @@ class CloseBracketParser implements InlineParserInterface, EnvironmentAwareInter
     }
 
     /**
-     * @param Cursor       $cursor
-     * @param ReferenceMap $referenceMap
-     * @param Delimiter    $opener
-     * @param int          $startPos
+     * @param Cursor                $cursor
+     * @param ReferenceMapInterface $referenceMap
+     * @param DelimiterInterface    $opener
+     * @param int                   $startPos
      *
      * @return array|bool
      */
+<<<<<<< HEAD
     protected function tryParseLink(Cursor $cursor, ReferenceMap $referenceMap, Delimiter $opener, int $startPos)
+=======
+    private function tryParseLink(Cursor $cursor, ReferenceMapInterface $referenceMap, DelimiterInterface $opener, int $startPos)
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     {
         // Check to see if we have a link/image
         // Inline link?
@@ -141,7 +156,7 @@ class CloseBracketParser implements InlineParserInterface, EnvironmentAwareInter
      *
      * @return array|bool
      */
-    protected function tryParseInlineLinkAndTitle(Cursor $cursor)
+    private function tryParseInlineLinkAndTitle(Cursor $cursor)
     {
         if ($cursor->getCharacter() !== '(') {
             return false;
@@ -177,15 +192,23 @@ class CloseBracketParser implements InlineParserInterface, EnvironmentAwareInter
     }
 
     /**
-     * @param Cursor       $cursor
-     * @param ReferenceMap $referenceMap
-     * @param Delimiter    $opener
-     * @param int          $startPos
+     * @param Cursor                $cursor
+     * @param ReferenceMapInterface $referenceMap
+     * @param DelimiterInterface    $opener
+     * @param int                   $startPos
      *
-     * @return Reference|null
+     * @return ReferenceInterface|null
      */
+<<<<<<< HEAD
     protected function tryParseReference(Cursor $cursor, ReferenceMap $referenceMap, Delimiter $opener, int $startPos): ?Reference
+=======
+    private function tryParseReference(Cursor $cursor, ReferenceMapInterface $referenceMap, DelimiterInterface $opener, int $startPos): ?ReferenceInterface
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     {
+        if ($opener->getIndex() === null) {
+            return null;
+        }
+
         $savePos = $cursor->saveState();
         $beforeLabel = $cursor->getPosition();
         $n = LinkParserHelper::parseLinkLabel($cursor);
@@ -211,7 +234,11 @@ class CloseBracketParser implements InlineParserInterface, EnvironmentAwareInter
      *
      * @return AbstractWebResource
      */
+<<<<<<< HEAD
     protected function createInline(string $url, string $title, bool $isImage)
+=======
+    private function createInline(string $url, string $title, bool $isImage)
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     {
         if ($isImage) {
             return new Image($url, null, $title);

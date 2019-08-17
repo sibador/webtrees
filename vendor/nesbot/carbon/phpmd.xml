@@ -22,14 +22,26 @@
     <rule ref="rulesets/cleancode.xml">
         <exclude name="BooleanArgumentFlag" />
         <exclude name="StaticAccess" />
+<<<<<<< HEAD
     </rule>
     <rule ref="rulesets/controversial.xml" />
     <rule ref="rulesets/design.xml">
+=======
+        <exclude name="IfStatementAssignment" />
+    </rule>
+    <rule ref="rulesets/controversial.xml" />
+    <rule ref="rulesets/design.xml">
+        <exclude name="EvalExpression" />
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
         <exclude name="CouplingBetweenObjects" />
     </rule>
     <rule ref="rulesets/design.xml/CouplingBetweenObjects">
         <properties>
+<<<<<<< HEAD
             <property name="minimum" value="16" />
+=======
+            <property name="maximum" value="20" />
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
         </properties>
     </rule>
     <rule ref="rulesets/naming.xml/ShortVariable">

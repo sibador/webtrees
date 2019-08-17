@@ -22,7 +22,7 @@ use League\CommonMark\Inline\Renderer\InlineRendererInterface;
 /**
  * Renders a parsed AST to HTML
  */
-class HtmlRenderer implements ElementRendererInterface
+final class HtmlRenderer implements ElementRendererInterface
 {
     /**
      * @var EnvironmentInterface
@@ -55,7 +55,11 @@ class HtmlRenderer implements ElementRendererInterface
      *
      * @return string
      */
+<<<<<<< HEAD
     protected function renderInline(AbstractInline $inline): string
+=======
+    public function renderInline(AbstractInline $inline): string
+>>>>>>> 56a34df1984fbc88561415294f7408501262a1ab
     {
         $renderers = $this->environment->getInlineRenderersForClass(get_class($inline));
 

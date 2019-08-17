@@ -2372,9 +2372,6 @@ class ReportParserGenerate extends ReportParserBase
         if (isset($attrs['maxgen'])) {
             $maxgen = (int) $attrs['maxgen'];
         }
-        if ($maxgen === '*') {
-            $maxgen = -1;
-        }
 
         $group = $attrs['group'] ?? 'child-family';
 
@@ -2516,11 +2513,11 @@ class ReportParserGenerate extends ReportParserBase
 
             $this->list_total   = count($this->list);
             $this->list_private = 0;
-            foreach ($this->list as $key => $value) {
+            foreach ($this->list as $xref => $value) {
                 if (isset($value->generation)) {
                     $this->generation = $value->generation;
                 }
-                $tmp          = GedcomRecord::getInstance($key, $this->tree);
+                $tmp          = GedcomRecord::getInstance((string) $xref, $this->tree);
                 $this->gedrec = $tmp->privatizeGedcom(Auth::accessLevel($this->tree));
 
                 $repeat_parser = xml_parser_create();

@@ -161,7 +161,14 @@ class Auth
      */
     public static function id(): ?int
     {
-        return Session::get('wt_user');
+        $id = Session::get('wt_user');
+
+        if ($id !== null) {
+            // In webtrees 1.x, the ID may have been a string.
+            $id = (int) $id;
+        }
+
+        return $id;
     }
 
     /**
@@ -208,7 +215,7 @@ class Auth
     public static function checkComponentAccess(ModuleInterface $module, string $component, Tree $tree, UserInterface $user): void
     {
         if ($module->accessLevel($tree, $component) < self::accessLevel($tree, $user)) {
-            throw new AccessDeniedHttpException('');
+            throw new AccessDeniedHttpException('Access denied');
         }
     }
 
